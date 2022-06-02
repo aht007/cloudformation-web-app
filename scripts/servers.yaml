@@ -1,0 +1,3 @@
+# yamllint disable-line rule:document-start
+AWSTemplateFormatVersion: 2010-09-09
+Description: AHT / Udacity - This template deploys servers on the top of network.
