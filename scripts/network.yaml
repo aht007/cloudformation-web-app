@@ -1,6 +1,6 @@
 # yamllint disable-line rule:document-start
 AWSTemplateFormatVersion: 2010-09-09
-Description: AHT / Udacity - This template deploys a network which will serves /
+Description: AHT / Udacity - This template deploys a network which will serves
  as basis for our servers.
 Parameters:
   EnvironmentName:

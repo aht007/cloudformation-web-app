@@ -1,6 +1,6 @@
 # yamllint disable-line rule:document-start
 AWSTemplateFormatVersion: 2010-09-09
-Description: AHT / Udacity - This template deploys servers on the top of /
+Description: AHT / Udacity - This template deploys servers on the top of
   network.
 Parameters:
   EnvironmentName:
@@ -55,8 +55,7 @@ Resources:
       SecurityGroups:
         - Ref: WebServerSecGroup
       InstanceType: t3.medium
-      IamInstanceProfile:
-        - Ref: S3InstanceProfile
+      IamInstanceProfile: !Ref S3InstanceProfile
       BlockDeviceMappings:
         - DeviceName: "/dev/sdk"
           Ebs:
