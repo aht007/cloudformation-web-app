@@ -55,7 +55,9 @@ Resources:
       SecurityGroups:
         - Ref: WebServerSecGroup
       InstanceType: t3.medium
-      IaminstanceProfile: !Ref ServerInstanceProfile
+      IaminstanceProfile:
+        - Ref: ServerInstanceProfile
+        - Ref: S3InstanceProfile
       BlockDeviceMappings:
         - DeviceName: "/dev/sdk"
           Ebs:
@@ -149,7 +151,11 @@ Resources:
     Properties:
       Roles:
         - !Ref IamRole
-        - !Ref UdacityS3ReadOnlyEC2Role
+  S3InstanceProfile:
+    Type: "AWS::IAM::InstanceProfile"
+    Properties:
+      Roles:
+        - !Ref UdacityS3ReadOnlyEC2Roles
 
 Outputs:
   WebAppLoadBalancerDNSName:
