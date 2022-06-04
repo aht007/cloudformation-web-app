@@ -55,8 +55,7 @@ Resources:
       SecurityGroups:
         - Ref: WebServerSecGroup
       InstanceType: t3.medium
-      IaminstanceProfile:
-        - Ref: ServerInstanceProfile
+      IamInstanceProfile:
         - Ref: S3InstanceProfile
       BlockDeviceMappings:
         - DeviceName: "/dev/sdk"
@@ -117,20 +116,6 @@ Resources:
       VpcId:
         Fn::ImportValue:
           Fn::Sub: "${EnvironmentName}-VPCID"
-  IamRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Action:
-              - "sts:AssumeRole"
-            Principal:
-              Service:
-                - ec2.amazonaws.com
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
   UdacityS3ReadOnlyEC2Role:
     Type: AWS::IAM::Role
     Properties:
@@ -145,17 +130,11 @@ Resources:
                 - ec2.amazonaws.com
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
-  # Instance Profile
-  ServerInstanceProfile:
-    Type: "AWS::IAM::InstanceProfile"
-    Properties:
-      Roles:
-        - !Ref IamRole
   S3InstanceProfile:
     Type: "AWS::IAM::InstanceProfile"
     Properties:
       Roles:
-        - !Ref UdacityS3ReadOnlyEC2Roles
+        - !Ref UdacityS3ReadOnlyEC2Role
 
 Outputs:
   WebAppLoadBalancerDNSName:
